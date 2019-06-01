@@ -1,3 +1,5 @@
+var count = 0;
+
 (function() {
 	var firebaseConfig = {
 		apiKey: "AIzaSyC2XbcwWxo3s23HjvPYD_dq94VyMjzh6lU",
@@ -10,3 +12,20 @@
 	};
 	firebase.initializeApp(firebaseConfig);
 }());
+
+function like(){
+	sync();
+	count += 1;
+	firebase.database().ref().set({
+		count: count
+	});
+	console.log("yes");
+}
+
+function sync(){
+  	firebase.database().ref().on('value', syncData);
+}
+
+function syncData(data){
+	count = data.val().count;
+}
