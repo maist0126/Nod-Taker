@@ -11,22 +11,11 @@ var count;
 		appId: "1:449677305537:web:d47f7aad8736334b"
 	};
 	firebase.initializeApp(firebaseConfig);
+
+	firebase.database().ref().on('value', syncData2);
+
 }());
 
-function like(){
-	sync();
-	count += 1;
-	firebase.database().ref().set({
-		count: count
-	});
-}
-
-function sync(){
-  	firebase.database().ref().on('value', syncData);
-  	console.log("a:" + count);
-}
-
-function syncData(data){
-	count = data.val().count;
-	console.log("b:" + data.val().count);
+function syncData2(data){
+	document.getElementById("taker").innerHTML=data.val().count;
 }

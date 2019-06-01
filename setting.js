@@ -1,5 +1,3 @@
-var count;
-
 (function() {
 	var firebaseConfig = {
 		apiKey: "AIzaSyC2XbcwWxo3s23HjvPYD_dq94VyMjzh6lU",
@@ -13,20 +11,8 @@ var count;
 	firebase.initializeApp(firebaseConfig);
 }());
 
-function like(){
-	sync();
-	count += 1;
+function setting(){
 	firebase.database().ref().set({
-		count: count
+		count: 0
 	});
-}
-
-function sync(){
-  	firebase.database().ref().on('value', syncData);
-  	console.log("a:" + count);
-}
-
-function syncData(data){
-	count = data.val().count;
-	console.log("b:" + data.val().count);
 }
